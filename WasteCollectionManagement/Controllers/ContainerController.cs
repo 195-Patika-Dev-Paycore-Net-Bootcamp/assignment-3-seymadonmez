@@ -129,9 +129,9 @@ namespace WasteCollectionManagement.Controllers
         {
             return _session.GetAll().Where(c => c.VehicleId == id).ToList();
         }
-        // ARaca ait ccontainerları eşit eleman olacak şekilde n kümeye ayırıp response'ta kümeleri veren metot
+        // Araca ait ccontainerları eşit eleman olacak şekilde n kümeye ayırıp response'ta kümeleri veren metot
         [HttpGet("GetClusteredContainerList")]
-        public List<List<Container>> GetClusteredContainerList(long vehicleId,int n)
+        public IActionResult GetClusteredContainerList(long vehicleId,int n)
         {
             var vehicleIdContainerList = _session.Entities.Where(v => v.VehicleId == vehicleId).ToList();
 
@@ -139,12 +139,12 @@ namespace WasteCollectionManagement.Controllers
                     (container, index) => new
                     {
                         ClusterIndex = index % n ,
-                        Item = container
-                    }).GroupBy()
+                        Value = container
+                    }).GroupBy(c => c.ClusterIndex, c => c.Value) 
                     .ToList();
             
 
-         return containerList;
+         return Ok(containerList);
         }
 
     }
