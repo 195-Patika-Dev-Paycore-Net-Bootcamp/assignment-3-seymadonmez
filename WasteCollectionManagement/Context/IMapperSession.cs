@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 namespace WasteCollectionManagement.Context
 {
+    //Veritabanı ile bağlantı sırasında yapılan işlemleri generic olarak tanımlayan imterface
     public interface IMapperSession<T> where T : class, new()
     {
         void BeginTransaction();

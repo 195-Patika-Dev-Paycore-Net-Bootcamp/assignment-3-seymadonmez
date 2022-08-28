@@ -5,6 +5,7 @@ using WasteCollectionManagement.Models;
 
 namespace WasteCollectionManagement.Mapping
 {
+    //Veritabanındaki Vehicke tablosu ile projedeki Vehicle classınin ilişkilendirilmesi
     public class VehicleMap: ClassMapping<Vehicle>
     {
         public VehicleMap()

@@ -7,6 +7,8 @@ using WasteCollectionManagement.Models;
 
 namespace WasteCollectionManagement.Context
 {
+    //Veritabanı ile bağlantı sırasında yapılan işlemleri generic olarak tanımlayan imterface'den kalıtım alır. 
+    // Vehicle sınıfı için yapılan veritabanı işlemlerini belirtir. 
     public class ContainerMapperSession : IMapperSession<Container>
     {
         private readonly ISession session;

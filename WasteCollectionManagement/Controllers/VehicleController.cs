@@ -19,6 +19,7 @@ namespace WasteCollectionManagement.Controllers
             _session = session;
         }
 
+        //Sistemdeki tüm araçları listeleyen metot
         [HttpGet]
         public List<Vehicle> GetAll()
         {
@@ -26,16 +27,17 @@ namespace WasteCollectionManagement.Controllers
             return result;
         }
 
-
+        // Verilen araç numarasına göre araç bilgisi getiren metot
         [HttpGet("{id}")]
-        public Vehicle Get(int id)
+        public Vehicle GetById(int id)
         {
-            Vehicle result = _session.GetAll().Where(x => x.VehicleId == id).FirstOrDefault();
+            Vehicle result = _session.GetById(id);
             return result;
         }
 
+        // Sisteme yeni araç ekleyen metot
         [HttpPost]
-        public void Post([FromBody] Vehicle vehicle)
+        public void AddVehicle([FromBody] Vehicle vehicle)
         {
             try
             {
@@ -54,8 +56,9 @@ namespace WasteCollectionManagement.Controllers
             }
         }
 
+        // Sistemdeki araç bilgisini güncelleyen metot
         [HttpPut]
-        public ActionResult<Vehicle> Put([FromBody] Vehicle request)
+        public ActionResult<Vehicle> Update([FromBody] Vehicle request)
         {
 
             Vehicle vehicle = _session.GetAll().Where(x => x.VehicleId == request.VehicleId).FirstOrDefault();
@@ -89,7 +92,7 @@ namespace WasteCollectionManagement.Controllers
             return Ok();
         }
 
-
+        // Verilen araç numarasına göre aracı silen metot
         [HttpDelete("{id}")]
         public ActionResult<Vehicle> Delete(int id)
         {

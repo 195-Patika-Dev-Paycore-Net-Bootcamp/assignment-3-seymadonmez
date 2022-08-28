@@ -5,6 +5,7 @@ using WasteCollectionManagement.Models;
 
 namespace WasteCollectionManagement.Mapping
 {
+    //Veritabanındaki Container tablosu ile projedeki Container classınin ilişkilendirilmesi
     public class ContainerMap : ClassMapping<Container>
     {
         public ContainerMap()
