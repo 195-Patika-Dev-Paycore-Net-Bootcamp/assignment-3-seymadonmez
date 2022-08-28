@@ -1,18 +1,23 @@
-﻿using System.Linq;
-using WasteCollectionManagement.Models;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 namespace WasteCollectionManagement.Context
 {
-    public interface IMapperSession
+    public interface IMapperSession<T> where T : class, new()
     {
         void BeginTransaction();
         void Commit();
         void Rollback();
         void CloseTransaction();
-        void Save(Vehicle entity);
-        void Update(Vehicle entity);
-        void Delete(Vehicle entity);
+        void Save(T entity);
+        void Update(T entity);
+        void Delete(int id);
+        List<T> GetAll();
+        T GetById(int id);
+        IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+        IEnumerable<T> Where(Expression<Func<T, bool>> where);
 
-        IQueryable<Vehicle> Vehicles { get; }
+        IQueryable<T> Entities { get; }
     }
 }

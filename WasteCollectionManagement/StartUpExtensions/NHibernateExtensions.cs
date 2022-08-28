@@ -4,6 +4,7 @@ using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Mapping.ByCode;
 using WasteCollectionManagement.Context;
+using WasteCollectionManagement.Models;
 
 namespace WasteCollectionManagement.StartUpExtensions
 {
@@ -35,7 +36,11 @@ namespace WasteCollectionManagement.StartUpExtensions
 
 
             // inject
-            services.AddScoped<IMapperSession, MapperSession>();
+            services.AddScoped<IMapperSession<Vehicle>, VehicleMapperSession>();
+            services.AddScoped<IMapperSession<Container>, ContainerMapperSession>();
+
+
+
 
             return services;
         }
