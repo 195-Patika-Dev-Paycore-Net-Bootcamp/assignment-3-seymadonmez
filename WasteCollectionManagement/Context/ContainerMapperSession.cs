@@ -19,7 +19,7 @@ namespace WasteCollectionManagement.Context
             this.session = session;
         }
 
-
+                    
         public IQueryable<Container> Entities => session.Query<Container>();
 
         public void BeginTransaction()
@@ -85,5 +85,6 @@ namespace WasteCollectionManagement.Context
         {
             return session.Query<Container>().Where(where).AsQueryable();
         }
+
     }
 }

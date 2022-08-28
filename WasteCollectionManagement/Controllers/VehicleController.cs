@@ -20,7 +20,7 @@ namespace WasteCollectionManagement.Controllers
         }
 
         //Sistemdeki tüm araçları listeleyen metot
-        [HttpGet]
+        [HttpGet("GetAll")]
         public List<Vehicle> GetAll()
         {
             List<Vehicle> result = _session.GetAll();

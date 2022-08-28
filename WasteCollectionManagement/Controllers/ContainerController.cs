@@ -20,7 +20,7 @@ namespace WasteCollectionManagement.Controllers
         }
 
         //Sistemdeki tüm containerları listeleyen metot
-        [HttpGet]
+        [HttpGet("GetAll")]
         public List<Container> GetAll()
         {
             List<Container> result = _session.GetAll();
@@ -123,11 +123,28 @@ namespace WasteCollectionManagement.Controllers
             return Ok();
         }
 
-        // Vehicle Id değerine göre container listesi getiren metot
-        [HttpGet]
+        // Verilen Vehicle Id değerine göre o araca ait container listesi getiren metot
+        [HttpGet("GetByVehicleId")]
         public List<Container> GetByVehicleId(long id)
         {
             return _session.GetAll().Where(c => c.VehicleId == id).ToList();
+        }
+        // ARaca ait ccontainerları eşit eleman olacak şekilde n kümeye ayırıp response'ta kümeleri veren metot
+        [HttpGet("GetClusteredContainerList")]
+        public List<List<Container>> GetClusteredContainerList(long vehicleId,int n)
+        {
+            var vehicleIdContainerList = _session.Entities.Where(v => v.VehicleId == vehicleId).ToList();
+
+            var containerList = vehicleIdContainerList.Select(
+                    (container, index) => new
+                    {
+                        ClusterIndex = index % n ,
+                        Item = container
+                    }).GroupBy()
+                    .ToList();
+            
+
+         return containerList;
         }
 
     }
